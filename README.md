@@ -25,17 +25,17 @@ To test the program:
 
 ## Known bugs
 
-1.One of the advanced test does not pass because i didn't correctly implement method invocation.
-The theory:
-"Before invoking a method, the caller also pushes the method arguments
+1. One of the advanced test does not pass because I didn't correctly implement method invocation.
+
+The theory: _"Before invoking a method, the caller also pushes the method arguments
 to the stack. Thereafter INVOKEVIRTUAL is called with one argument, which
 is a reference to a pointer in the constant pool. The pointer in the constant
 pool, in turn points to the first address of the method area. The method
 area first contains two shorts (2 byte numbers), the first one signifying the
 number of arguments the method expects, and the second one being the
 local variable area size. The fifth byte in the method area is the actual
-first instruction to be executed."
+first instruction to be executed."_
 
-The problem is (as far as i am concerned) with one of the shorts. I don't use the local variable area size. In line 193 of the IJVM class the short is being explicitly skipped: ```text.skipShort();```
+The problem is, as far as I am concerned, with one of the shorts. I don't use the local variable area size. In line 193 of the IJVM class the short is being explicitly skipped: ```text.skipShort();```
 
-2.The "Short" class i made was an illegal manual override of the java API class Short. At the time i didn't new this could lead to a problem. The JVM could use the API class instead of the package class "Short", therefore throwing errors all over the place.
+2. The "Short" class I created was an illegal override of the built-in java API class Short. This may result in unwanted behaviour
